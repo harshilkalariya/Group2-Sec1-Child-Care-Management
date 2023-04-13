@@ -1,0 +1,8 @@
+{
+  "name": "JRAuto",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular"
+}

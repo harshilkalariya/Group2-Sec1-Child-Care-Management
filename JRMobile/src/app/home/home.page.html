@@ -1,0 +1,89 @@
+<ion-content [fullscreen]="true">
+  <div class="homePage">
+    <div class="welcomeMsg">
+      <div class="hiMsg">Hi {{userName}}!</div>
+      <div class="greetings">{{greetMsg}}</div>
+    </div>
+
+    <div class="jrIntro">
+      <div class="jrCardInfo">
+        <div class="infoWelcome">Welcome!</div>
+        <div class="infoNote"> To the JR child care solution</div>
+      </div>
+      <div class="jrIllustrater"><img src="../../assets/jrMobileHome 1.svg" alt=""></div>
+    </div>
+
+    <div class="jrIntro">
+      <div class="jrCardAnnouncements">
+        <div class="infoWelcome">Announcements!</div>
+        <div class="infoNote"> This is new announcement form Instructor</div>
+      </div>
+    </div>
+
+    <div class="ongoing" *ngIf="canLoad">
+      <div class="ongoingProjectLine">
+        <div>Current Inquiries</div>
+        <div class="viewAllBtn ion-activatable ripple-parent" (click)="viewAllRunningProject()">View All
+          <ion-ripple-effect></ion-ripple-effect>
+        </div>
+      </div>
+
+      <div *ngIf="inquiryList && inquiryList.length < 1">
+        <div class="noMoreSvgBox">
+          <div class="noMoreSvg">
+            <img src="../../../../assets/waiting.svg" alt="">
+          </div>
+          <div class="noMsg">
+            No Any In Process Inquiries
+          </div>
+        </div>
+      </div>
+
+      <div class="homeInfo" *ngIf="inquiryList && inquiryList.length > 0">
+        <div class="ongoingCard" *ngFor="let inquiry of fourInquiry">
+          <ion-row>
+            <ion-col class="dateLine">
+              <div>
+                <ion-icon name="calendar-outline"></ion-icon>
+              </div>
+              <div class="cardDate">{{inquiry.createdOn | date:"dd-MMM-yyyy"}}</div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="personrIcon ion-no-padding" size="3">
+              <ion-icon name="person-circle-outline"></ion-icon>
+            </ion-col>
+            <ion-col class="fullName ion-no-padding" size="9">
+              <div class="name">{{inquiry.firstName}}</div>
+              <div class="name">{{inquiry.lastName}}</div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="ion-no-padding">
+              <div class="cardStatus">
+                <span>{{getInquiryStageName(inquiry.status)}}</span>
+              </div>
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+    </div>
+
+    <div class="newInquiryCard ion-activatable ripple-parent" (click)="goToNewInquiry()" *ngIf="canLoad">
+      <div class="addInquiryBg">
+        <img src="../../assets/Hexagon.svg" alt="">
+      </div>
+      <div class="newInquiryText">
+        <div class="plusSign"><img src="../../assets/plusSign.png" alt=""></div>
+        Register Your Child
+      </div>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+
+    <div class="waitingSvgBox" *ngIf="!canLoad">
+      <div class="waitingSvg">
+        <img src="../../../../assets/waiting.svg" alt="">
+      </div>
+    </div>
+  </div>
+</ion-content>

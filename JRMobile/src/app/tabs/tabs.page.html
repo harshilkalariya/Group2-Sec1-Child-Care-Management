@@ -1,0 +1,22 @@
+<ion-tabs #tabs (ionTabsDidChange)="setSelectedTab()">
+  <ion-tab-bar slot="bottom" class="ion-no-border">
+    <ion-tab-button tab="home">
+      <ion-icon [name]="selected=='home'? 'home': 'home-outline'"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="product">
+      <ion-icon [name]="selected=='product'? 'tablet-landscape': 'tablet-landscape-outline'"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="inquiry">
+      <ion-icon [name]="selected=='inquiry'? 'mail': 'mail-outline'"></ion-icon>
+      <!-- <ion-icon name=""></ion-icon> -->
+      <!-- <ion-icon name=""></ion-icon> -->
+      <!-- <ion-badge *ngIf="new_activities">{{new_activities}}</ion-badge> -->
+    </ion-tab-button>
+
+    <ion-tab-button tab="profile">
+      <ion-icon [name]="selected=='profile'? 'person':'person-outline'"></ion-icon>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

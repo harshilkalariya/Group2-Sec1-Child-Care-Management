@@ -1,0 +1,42 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>PROFILE</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <div class="profileContainer">
+    <div class="top">
+      <div class="logo">
+        <img class="blackLogo" src="../../assets/logo_black.png" alt="JR" />
+      </div>
+    </div>
+    <div class="userInfo">
+      <div class="userName">{{currentUser?.businessName}}</div>
+      <div class="userId">{{currentUser?.businessId}}</div>
+    </div>
+    <div class="parentInfo">
+      <div class="parentHeader">Admin Name</div>
+      <div class="parentName">{{currentUser?.ownerBusinessName}}</div>
+    </div>
+
+    <div class="logoutBtn">
+      <ion-button color="primary" expand="block" (click)="logout()">Logout</ion-button>
+    </div>
+
+    <div class="feedback">
+      <div (click)="goToFeedBackPage()">
+        Feedback & Experience
+      </div>
+    </div>
+    <div class="empty">&nbsp; </div>
+    <div class="copyRight">
+      <div class="copyR">
+        &copy; Copyright - JR Daycare
+      </div>
+      <div class="developedBy">
+        Developed by - Group2_Section1
+      </div>
+    </div>
+  </div>
+</ion-content>

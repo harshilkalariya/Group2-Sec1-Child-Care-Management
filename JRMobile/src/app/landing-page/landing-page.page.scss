@@ -1,0 +1,161 @@
+ion-card {
+    margin-bottom: 20px;
+}
+
+ion-header ion-toolbar {
+    background-color: black !important;
+    color: white;
+}
+
+ion-card img {
+    width: 100%;
+}
+
+ion-card-content {
+    color: black !important;
+}
+
+ion-card-header ion-card-subtitle {
+    font-size: 14px;
+    color: black !important;
+}
+
+ion-card-header ion-card-title {
+    font-size: 18px;
+}
+
+ion-footer {
+    background-color: #f8f8f8;
+    border-top: 1px solid #ddd;
+    color: #999;
+    padding: 15px;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.social-media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-media a {
+    margin: 0 10px;
+    color: #999;
+}
+
+.social-media a:hover {
+    color: #333;
+}
+
+.jumbotron {
+    position: relative;
+    height: 500px;
+    width: 100%;
+    background-color: #333;
+}
+
+.jumbotron img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    filter: brightness(50%);
+}
+
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+}
+
+.content h1 {
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+button {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007aff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #006fe6;
+}
+
+ion-slides{
+    background-color: gray;
+    padding: 30px;
+}
+
+ion-slide{
+    background-color: white;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 5px;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    width: 90%;
+    margin-right: 10px;
+}
+
+.profile:last-child {
+    margin-right: 0;
+}
+
+.profile img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.profile h2 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.profile p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.btn-pdf{
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+
+@media only screen and (min-width: 768px) {
+    ion-col[size-lg="6"] {
+        flex-basis: 50%;
+        max-width: 50%;
+    }
+
+    ion-col[size-lg="4"] {
+        flex-basis: 33.333333%;
+        max-width: 33.333333%;
+    }
+}

@@ -1,0 +1,71 @@
+.loginBg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: clamp(700px, 100%, 100%);
+  height: clamp(var(--vh), 100%, 100%);
+  overflow: hidden;
+
+  img {
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    filter: invert(1);
+    opacity: 0.8;
+  }
+}
+
+.mainContainer {
+  padding-top: 56px;
+  height: 100%;
+  --ion-grid-column-padding: 0px !important;
+
+  ion-input {
+    --padding-top: 0;
+    --padding-bottom: 0;
+  }
+}
+
+.top {
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  padding: 20px;
+  background-color: var(--body);
+  box-shadow: 0 0 5px rgba(var(--darkRGB), 0.2);
+  border-radius: 10px;
+
+  img {
+    height: 70px;
+  }
+}
+
+.inputForLoginPage {
+  margin-top: 46px;
+  width: 100%;
+
+  .loginBtn {
+    margin-top: 30px;
+  }
+
+  .forgotPass {
+    margin-top: 20px;
+    text-align: right;
+    color: #5f5ffc;
+    font-size: 0.75rem;
+  }
+
+  .backToLogin {
+    margin-top: 20px;
+    text-align: left;
+    color: #5f5ffc;
+    font-size: 0.75rem;
+  }
+
+  .hidden {
+    visibility: hidden;
+  }
+}

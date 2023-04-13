@@ -1,0 +1,209 @@
+.currentInquiryDetailPage {
+  padding: 5px 20px 70px 20px;
+
+  .clieantAllDetail {
+    border-radius: 25px;
+    background-color: var(--card-backGround);
+    text-transform: capitalize;
+    box-shadow: 3px 3px 6px 0px rgba(var(--darkRGB), 0.15);
+
+    .clientDetail {
+      background-color: var(--card-backGround-dark);
+      border-radius: 25px;
+      box-shadow: 0px 4px 5px rgba(var(--darkRGB), 0.2);
+      color: var(--font-dark);
+
+      .clientName {
+        padding: 10px 20px;
+        text-align: center;
+        font-size: 1.15rem;
+        border-bottom: 2px solid var(--card-border);
+      }
+
+      .numberAddressMore {
+        display: flex;
+        padding: 15px 20px;
+
+        .nameAndNumber {
+          flex-grow: 1;
+          border-right: 1px solid var(--card-border);
+          padding-right: 10px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+
+          .number {
+            display: flex;
+            padding-bottom: 5px;
+
+            .numberIcon {
+              padding-right: 5px;
+            }
+
+          }
+
+          .type {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .typeIcon {
+              padding-bottom: 5px;
+            }
+          }
+        }
+
+        .address {
+          flex-grow: 1;
+          padding-left: 10px;
+          display: flex;
+
+          .addressIcon {
+            padding-right: 5px;
+          }
+        }
+      }
+    }
+
+    .otherInformation {
+      padding: 20px;
+
+      .dateAndType {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 5px;
+      }
+
+      .inquiryByandOwner {
+        display: flex;
+        padding-bottom: 5px;
+
+        .titleByandOwner {
+          min-width: 75px;
+          padding-right: 10px;
+        }
+      }
+
+      .status {
+        width: 100%;
+        padding: 10px;
+        margin-top: 15px;
+        text-align: center;
+        font-weight: 600;
+        color: var(--font-gold);
+        border-radius: 25px;
+        background-color: var(--body);
+        box-shadow: inset -2px -2px 3px 0px rgba(var(--bodyRGB), 0.5), inset 2px 2px 5px 0px rgba(var(--darkRGB), 0.2);
+        ;
+      }
+    }
+  }
+
+  .projectTimeLine {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 20px;
+    transform: translateX(-20px);
+
+    .text {
+      font-size: 1.15rem;
+      padding: 10px 25px 10px 20px;
+      color: var(--font-dark);
+      background-color: var(--dark);
+      border-left: none;
+      border-top-right-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+  }
+
+  .waitingSvgBox{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    .waitingSvg{
+      width: 50%;
+
+      img{
+        width: 100%;
+        background-size: cover;
+      }
+    }
+  }
+
+  .timeline {
+
+    .timelineCard {
+      width: 100%;
+      margin-top: 20px;
+      background-color: var(--card-backGround);
+      border: 2px solid var(--card-border);
+      border-radius: 15px;
+      padding: 15px;
+
+      .cardFirstLine {
+        display: flex;
+        justify-content: space-between;
+
+        .cardDetail {
+          border-left: 5px solid var(--card-border);
+          padding: 5px 10px 5px 20px;
+
+          .cardName {
+            font-size: 1.15rem;
+            font-weight: 500;
+          }
+
+          .cardDate {
+            font-size: 0.85rem;
+            opacity: 0.6;
+            padding-top: 5px;
+          }
+
+          .cardDesc {
+            font-size: 0.9rem;
+            padding-top: 10px;
+            opacity: 0.9;
+          }
+        }
+
+        .completedActivity {
+          border-left: 5px solid var(--font-gold);
+        }
+
+        .icon {
+          display: flex;
+          align-items: center;
+        }
+
+        .doneIcon {
+          color: green;
+          font-size: 1.5rem;
+        }
+
+        .holdIcon {
+          color: #f5f504;
+          font-size: 1.5rem;
+        }
+      }
+
+      .inquiryAction {
+        padding: 10px 0px 5px 0px;
+
+        .inquiryInput {
+          margin: 10px 10px 5px 10px;
+          border: 1px solid var(--font-gold);
+          border-radius: 10px;
+
+          ion-item {
+            border-radius: 10px;
+            --background: var(--card-backGround);
+          }
+
+          .item-has-focus{--highlight-background: var(--font-gold);}
+        }
+      }
+    }
+  }
+}

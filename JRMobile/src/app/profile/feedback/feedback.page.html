@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Feedback</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="feedBackPage">
+    <div class="headerLine">
+      We would love to hear your thoughts.
+    </div>
+    <div class="type">
+      <ion-item>
+        <ion-label position="stacked">Type *</ion-label>
+        <ion-select [(ngModel)]="feedbackType" interface="alert">
+          <ion-select-option [value]=feedBack *ngFor="let feedBack of feedbackOption">{{feedBack}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+    <div class="feedbackText">
+      <ion-item>
+        <ion-label position="stacked">Description</ion-label>
+        <ion-textarea rows="5" maxlength="150" type="text" [(ngModel)]="feedbackDesc"
+          (ngModelChange)="calculateLength()"></ion-textarea>
+      </ion-item>
+      <div class="maxWords" [ngClass]="{redFont:descLength==150}">* {{descLength}} / 150 letter</div>
+    </div>
+
+    <div class="feedbackbtn">
+      <ion-button class="loginBtn" color="dark" expand="block" (click)="submitFeedback()">Submit</ion-button>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,168 @@
+<ion-header #header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/inquiry"></ion-back-button>
+    </ion-buttons>
+    <ion-title>NEW INQUIRY</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" scrollEvents="true" [appHeaderOnScroll]="header">
+  <ion-grid class="newInquiryInputs">
+    <form [formGroup]="newInquiryInput" #inquiryForm="ngForm" (ngSubmit)="addNewInquiry()">
+      <ion-row class="inquiryInput">
+        <ion-col>
+          <ion-item>
+            <ion-label position="stacked">First Name *</ion-label>
+            <ion-input type="text" formControlName="firstName"></ion-input>
+          </ion-item>
+          <div class="invalid-tooltip"
+            *ngIf="(inq.firstName.invalid && inq.firstName.dirty) || (inq.firstName.invalid && isInvalid)">
+            <div *ngIf="inq.firstName.errors?.['required']">First Name is required.</div>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="inquiryInput">
+        <ion-col>
+          <ion-item>
+            <ion-label position="stacked">Last Name *</ion-label>
+            <ion-input type="text" formControlName="lastName"></ion-input>
+          </ion-item>
+          <div class="invalid-tooltip"
+            *ngIf="(inq.lastName.invalid && inq.lastName.dirty) || (inq.lastName.invalid && isInvalid)">
+            <div *ngIf="inq.lastName.errors?.['required']">Last Name is required.</div>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="inquiryInput">
+        <ion-col>
+          <ion-item>
+            <ion-label position="stacked">Mobile No. (10 Digit) *</ion-label>
+            <ion-input type="text" formControlName="mobileNumber"></ion-input>
+          </ion-item>
+          <div class="invalid-tooltip"
+            *ngIf="(inq.mobileNumber.invalid && inq.mobileNumber.dirty) || (inq.mobileNumber.invalid && isInvalid)">
+            <div *ngIf="inq.mobileNumber.errors?.['required']">Mobile number is required.</div>
+            <div *ngIf="inq.mobileNumber.errors?.['pattern']">Mobile number must be 10 number.</div>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="inquiryInput">
+        <ion-col>
+          <ion-item>
+            <ion-label position="stacked">Mobile No. (Optional)</ion-label>
+            <ion-input type="text" formControlName="secondNumber"></ion-input>
+          </ion-item>
+          <div class="invalid-tooltip"
+            *ngIf="(inq.secondNumber.invalid && inq.secondNumber.dirty) || (inq.secondNumber.invalid && isInvalid)">
+            <div *ngIf="inq.secondNumber.errors?.['pattern']">Mobile number must be 10 number.</div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="inquiryInput">
+        <ion-col>
+          <ion-item>
+            <ion-label position="stacked">Flat / Unit Number *</ion-label>
+            <ion-input type="text" formControlName="houseDetail"></ion-input>
+          </ion-item>
+          <div class="invalid-tooltip"
+            *ngIf="(inq.houseDetail.invalid && inq.houseDetail.dirty) || (inq.houseDetail.invalid && isInvalid)">
+            <div *ngIf="inq.houseDetail.errors?.['required']">Flat / Unit Number is required.</div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="inquiryInput">
+        <ion-col>
+          <ion-item>
+            <ion-label position="stacked">Street / Area Details *</ion-label>
+            <ion-input type="text" formControlName="areaDetail"></ion-input>
+          </ion-item>
+          <div class="invalid-tooltip"
+            *ngIf="(inq.areaDetail.invalid && inq.areaDetail.dirty) || (inq.areaDetail.invalid && isInvalid)">
+            <div *ngIf="inq.areaDetail.errors?.['required']">Street / Area details is required.</div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="inquiryInput">
+        <ion-col>
+          <ion-item>
+            <ion-label position="stacked">State *</ion-label>
+            <ion-select (ngModelChange)="getDistrictByState($event)" formControlName="stateId" interface="action-sheet">
+              <ion-select-option [value]="state.stateId" *ngFor="let state of stateList">{{state.stateTitle}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+          <div class="invalid-tooltip"
+            *ngIf="(inq.stateId.invalid && inq.stateId.dirty) || (inq.stateId.invalid && isInvalid)">
+            <div *ngIf="inq.stateId.errors?.['required']">State is required.</div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="inquiryInput">
+        <ion-col>
+          <ion-item>
+            <ion-label position="stacked">District *</ion-label>
+            <ion-select (ngModelChange)="getCityByDistrict($event)" formControlName="districtId"
+              interface="action-sheet">
+              <ion-select-option [value]="district.districtId" *ngFor="let district of districtList">
+                {{district.districtTitle}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <div class="invalid-tooltip"
+            *ngIf="(inq.districtId.invalid && inq.districtId.dirty) || (inq.districtId.invalid && isInvalid)">
+            <div *ngIf="inq.districtId.errors?.['required']">District is required.</div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="inquiryInput">
+        <ion-col>
+          <ion-item>
+            <ion-label position="stacked">City *</ion-label>
+            <ion-select formControlName="locationId" interface="action-sheet">
+              <ion-select-option [value]="city.cityId" *ngFor="let city of cityList">{{city.cityTitle}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+          <div class="invalid-tooltip"
+            *ngIf="(inq.locationId.invalid && inq.locationId.dirty) || (inq.locationId.invalid && isInvalid)">
+            <div *ngIf="inq.locationId.errors?.['required']">City is required.</div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="inquiryInput">
+        <ion-col>
+          <ion-item>
+            <ion-label position="stacked">Pin Code *</ion-label>
+            <ion-input type="text" formControlName="pincode"></ion-input>
+          </ion-item>
+          <div class="invalid-tooltip"
+            *ngIf="(inq.pincode.invalid && inq.pincode.dirty) || (inq.pincode.invalid && isInvalid)">
+            <div *ngIf="inq.pincode.errors?.['required']">Pin Code is required.</div>
+            <div *ngIf="inq.pincode.errors?.['pattern']">Pin Code must be 6 number.</div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="inquiryInput">
+        <ion-col>
+          <ion-item id="open-modal2">
+            <ion-label>Date of Birth *</ion-label>
+            <ion-note slot="end">{{dateOfBirth | date}}</ion-note>
+            <ion-modal trigger="open-modal2" [cssClass]="'bottom-end'">
+              <ng-template>
+                <ion-datetime max="{{dateOfBirth}}" presentation="date" [(ngModel)]="dateOfBirth"
+                  [ngModelOptions]="{standalone: true}" size="cover" [showDefaultButtons]="true"></ion-datetime>
+              </ng-template> </ion-modal>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="inquiryInput">
+        <ion-col>
+          <ion-button color="dark" expand="block" type="submit">Create New Inquiry</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
+</ion-content>

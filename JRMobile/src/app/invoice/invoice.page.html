@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>invoice</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>From</ion-label>
+    <ion-input [(ngModel)]="letterObj.from"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>To</ion-label>
+    <ion-input [(ngModel)]="letterObj.to"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Text</ion-label>
+    <ion-input [(ngModel)]="letterObj.text"></ion-input>
+  </ion-item>
+  <ion-button class="loginBtn" color="dark" expand="block" (click)="createPdf()">Create PDF</ion-button>
+  <ion-button class="loginBtn" color="dark" expand="block" (click)="downloadPdf()" [disabled]="!pdfObj">Download
+    PDF
+  </ion-button>
+</ion-content>

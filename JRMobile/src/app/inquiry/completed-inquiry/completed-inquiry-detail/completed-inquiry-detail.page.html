@@ -1,0 +1,126 @@
+<ion-header #header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/inquiry/completed-inquiry"></ion-back-button>
+    </ion-buttons>
+    <ion-title>PROJECT DETAIL</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" scrollEvents="true" [appHeaderOnScroll]="header">
+
+  <div class="completedInquiryDetailPage" *ngIf="canLoad">
+    <div class="clieantAllDetail">
+      <div class="clientDetail">
+        <div class="clientName">
+          {{selectedInquiry?.firstName}} {{selectedInquiry?.lastName}}
+        </div>
+        <div class="numberAddressMore">
+          <div class="nameAndNumber">
+            <div class="number">
+              <div class="numberIcon">
+                <ion-icon name="call"></ion-icon>
+              </div>
+              <div>
+                <div>{{selectedInquiry?.mobileNumber}}</div>
+                <div *ngIf="selectedInquiry?.secondNumber">{{selectedInquiry?.secondNumber}}</div>
+              </div>
+            </div>
+            <div class="type">
+              <div class="typeIcon">
+                <ion-icon name="business"></ion-icon>
+              </div>
+              <div>{{selectedInquiry?.inquiryType}}</div>
+            </div>
+          </div>
+          <div class="address">
+            <div class="addressIcon">
+              <ion-icon name="location"></ion-icon>
+            </div>
+            <div>
+              <div>
+                {{selectedInquiry?.houseDetail}},
+              </div>
+              <div>
+                {{selectedInquiry?.areaDetail}},
+              </div>
+              <div>
+                {{selectedInquiry?.cityTitle}},
+                {{selectedInquiry?.districtTitle}},
+                {{selectedInquiry?.stateTitle}},
+              </div>
+              <div>
+                Pincode - {{selectedInquiry?.pincode}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="otherInformation">
+        <div class="inquiryByandOwner">
+          <div class="titleByandOwner">Parent :</div>
+          <div>{{selectedInquiry?.businessName}}</div>
+        </div>
+        <!-- <div class="inquiryByandOwner">
+          <div class="titleByandOwner">Partner :</div>
+          <div>{{selectedInquiry?.ownerName}}</div>
+        </div> -->
+        <div class="inquiryByandOwner" *ngIf="selectedInquiry?.interiorName">
+          <div class="titleByandOwner">Interior :</div>
+          <div>{{selectedInquiry?.interiorName}}</div>
+        </div>
+        <div class="status">
+          {{selectedInquiry? getInquiryStageName(selectedInquiry.status) : ''}}
+        </div>
+      </div>
+    </div>
+
+    <div class="projectTimeLine">
+      <div class="text">
+        Project Status & Timeline
+      </div>
+    </div>
+
+    <div class="timeline" *ngIf="timelineData">
+      <ng-container *ngFor="let inquiry of timeline">
+        <div class="timelineCard" *ngIf="inquiry.date">
+          <div class="cardFirstLine">
+            <div class="cardDetail" [ngClass]="{completedActivity: inquiry.date}">
+              <div class="cardName">{{inquiry.status}}</div>
+              <div class="cardDate" *ngIf="inquiry.date">{{inquiry.date | date:"dd-MMM-yyyy hh:mm a"}}</div>
+              <div class="cardDesc" *ngIf="inquiry.desc">{{inquiry.desc}}</div>
+            </div>
+            <div class="icon"
+              *ngIf="inquiry.status !=='Response By Client' && inquiry.status !=='Response By Company' ">
+              <div class="doneIcon" *ngIf="inquiry.date">
+                <ion-icon name="checkmark-circle"></ion-icon>
+              </div>
+            </div>
+            <div class="icon" *ngIf="inquiry.status =='Response By Client'">
+              <div class="doneIcon" *ngIf="inquiry.date && selectedInquiry?.status !=='CANCEL_BY_CLIENT'">
+                <ion-icon name="checkmark-circle"></ion-icon>
+              </div>
+              <div class="rejectIcon" *ngIf="inquiry.date && selectedInquiry?.status =='CANCEL_BY_CLIENT'">
+                <ion-icon name="close-circle"></ion-icon>
+              </div>
+            </div>
+            <div class="icon" *ngIf="inquiry.status =='Response By Company'">
+              <div class="doneIcon" *ngIf="inquiry.date && selectedInquiry?.status !=='REJECTED_BY_JR'">
+                <ion-icon name="checkmark-circle"></ion-icon>
+              </div>
+              <div class="rejectIcon" *ngIf="inquiry.date && selectedInquiry?.status =='REJECTED_BY_JR'">
+                <ion-icon name="close-circle"></ion-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="waitingSvgBox" *ngIf="!timelineData">
+      <div class="waitingSvg">
+        <img src="../../../../assets/waiting.svg" alt="">
+      </div>
+    </div>
+  </div>
+</ion-content>

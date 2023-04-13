@@ -1,0 +1,48 @@
+ion-icon {
+  color: var(--font);
+}
+
+ion-tabs {
+  ion-fab {
+    margin-bottom: env(safe-area-inset-bottom);
+
+    /* fix notch ios*/
+    ion-fab-button {
+      --box-shadow: none;
+    }
+  }
+
+  ion-tab-bar {
+    --border: 0;
+    --background: transparent;
+    background-color: rgba(var(--bodyRGB), 0.6);
+    backdrop-filter: blur(7px);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    box-shadow: 0 -1px 3px rgba(var(--darkRGB), 0.1);
+
+    &:after {
+      content: "";
+      width: 100%;
+      bottom: 0;
+      --background: transparent;
+      background-color: rgba(var(--bodyRGB), 0.6);
+      height: env(safe-area-inset-bottom);
+      position: absolute;
+    }
+
+    ion-tab-button {
+      --background: transparent;
+      background-color: transparent;
+
+    }
+  }
+}
+
+ion-ripple-effect {
+  --color-selected: rgb(110, 113, 118) !important;
+  color: var(--color-selected) !important;
+}

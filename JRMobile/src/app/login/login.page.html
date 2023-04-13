@@ -1,0 +1,88 @@
+<ion-content>
+  <div class="loginBg">
+    <img src="../../assets/smart1.jpg" alt="JR Daycare">
+  </div>
+  <div class="mainContainer ion-padding">
+    <div class="top">
+      <div class="logo">
+        <img class="blackLogo" src="../../assets/logo_black.png" alt="JR">
+      </div>
+    </div>
+
+    <ion-grid *ngIf="loginPage" class="inputForLoginPage">
+      <ion-row class="ion-justify-content-center">
+        <ion-col size-md="6">
+          <ion-card class="ion-padding-horizontal">
+            <ion-card-content class="ion-padding">
+              <form [formGroup]="loginInput" (ngSubmit)="login()">
+                <ion-item class="ion-no-padding inputUnderline">
+                  <ion-label color="dark" position="floating">Email ID / Mobile No.</ion-label>
+                  <ion-input type="text" mode="ios" formControlName="username"></ion-input>
+                </ion-item>
+                <ion-item class="ion-no-padding">
+                  <ion-label color="dark" position="floating">Password</ion-label>
+                  <ion-input type="password" mode="ios" formControlName="password"></ion-input>
+                </ion-item>
+                <ion-button class="loginBtn" color="dark" expand="block" type="submit">Login</ion-button>
+                <div class="forgotPass"> <span (click)="forgotPassPageShow()">Forgot Password?</span></div>
+              </form>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngIf="forgotPasswordPage" class="inputForLoginPage">
+      <ion-row class="ion-justify-content-center">
+        <ion-col size-md="6">
+          <ion-card class="ion-padding-horizontal">
+            <ion-card-content class="ion-padding">
+              <form>
+                <ion-item class="ion-no-padding">
+                  <ion-label color="dark" position="floating">Email ID / Mobile No.</ion-label>
+                  <ion-input type="text" [formControl]="resetUserName"></ion-input>
+                </ion-item>
+
+                <ion-item class="hidden ion-no-padding" [ngClass]="{'ion-hide': isOTPReceived}">
+                  <ion-label color="dark" position="floating">Dummy</ion-label>
+                  <ion-input type="text"></ion-input>
+                </ion-item>
+
+
+                <ion-grid *ngIf="isOTPReceived && !isOTPValidated" class="ion-no-padding">
+                  <ion-row class="ion-align-items-center">
+                    <ion-col size="8">
+                      <ion-item class="ion-no-padding">
+                        <ion-label color="dark" position="floating">OTP</ion-label>
+                        <ion-input type="password" [formControl]="resetOTP"></ion-input>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col size="4">
+                      <ion-button color="dark" expand="block" (click)="generateOTP()" [disabled]="!resendOTP">
+                        <span *ngIf="otpTimeLeft > 0">{{otpTimeLeft}} S</span>
+                        <span *ngIf="otpTimeLeft == 0">Resend</span>
+                      </ion-button>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+
+                <ion-item *ngIf="isOTPValidated" class="ion-no-padding">
+                  <ion-label color="dark" position="floating">New Password</ion-label>
+                  <ion-input type="password" [formControl]="newPassword"></ion-input>
+                </ion-item>
+                <ion-button class="loginBtn" color="dark" expand="block" (click)="generateOTP()" *ngIf="!isOTPReceived">
+                  Get OTP</ion-button>
+                <ion-button class="loginBtn" color="dark" expand="block" (click)="submitOTP()"
+                  *ngIf="isOTPReceived && !isOTPValidated">Submit</ion-button>
+                <ion-button class="loginBtn" color="dark" expand="block" (click)="resetPassword()"
+                  *ngIf="isOTPValidated">Change Password
+                </ion-button>
+                <div class="backToLogin"> <span (click)="loginPageShow()"> Back to Login </span></div>
+              </form>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

@@ -1,0 +1,40 @@
+.feedBackPage {
+  padding: 20px 15px 70px 15px;
+
+  ion-item {
+    --border-color: rgba(var(--darkRGB), 0.3);
+    --background: var(--card-backGround);
+  }
+
+  .item-has-focus {
+    --highlight-background: rgba(var(--darkRGB), 0.3);
+  }
+
+  .headerLine {
+    background-color: var(--card-backGround-dark);
+    margin: 10px 0px 35px 0px;
+    padding: 10px 15px;
+    border-radius: 25px;
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--font-dark);
+  }
+
+  .type {
+    margin: 0px 0px 25px 0px;
+  }
+
+  .feedbackText {
+    margin-bottom: 31px;
+
+    .maxWords{
+      font-size: 0.8rem;
+      text-align: end;
+      margin-top: 5px;
+    }
+
+    .redFont{
+      color: red;
+    }
+  }
+}

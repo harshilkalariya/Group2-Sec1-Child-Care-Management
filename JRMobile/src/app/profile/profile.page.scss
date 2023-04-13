@@ -1,0 +1,92 @@
+.profileContainer {
+  padding: 60px 20px 70px 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  --ion-grid-column-padding: 0px !important;
+
+  .top {
+    display: flex;
+    justify-content: center;
+
+    .logo {
+      padding: 20px;
+      background-color: var(--body);
+      box-shadow: 0 0 5px rgba(var(--darkRGB), 0.2);
+      border-radius: 10px;
+
+      img {
+        height: 70px;
+      }
+    }
+  }
+
+  .userInfo {
+    display: grid;
+    justify-content: center;
+
+    .userName {
+      font-size: 1.3rem;
+      text-align: center;
+    }
+
+    .userId {
+      font-size: 0.9rem;
+      text-align: center;
+      padding-top: 5px;
+    }
+
+  }
+
+  .parentInfo {
+    text-align: center;
+    margin: 0px 25px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--card-backGround);
+    border: 1px solid var(--card-border);
+
+    .parentHeader {
+      font-size: 1rem;
+      padding-bottom: 5px;
+    }
+
+    .parentName {
+      font-size: 1.15rem;
+    }
+  }
+
+
+  .logoutBtn {
+    padding: 0px 25px;
+  }
+
+  .feedback {
+    display: flex;
+    justify-content: center;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .empty {
+    flex-grow: 1;
+  }
+
+  .copyRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.7;
+    padding-bottom: 10px;
+
+    .copyR{
+      margin-bottom: 5px;
+    }
+
+    .developedBy{
+      font-size: 0.8rem;
+    }
+  }
+}

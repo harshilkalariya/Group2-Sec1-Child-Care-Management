@@ -1,0 +1,92 @@
+<ion-header #header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/inquiry"></ion-back-button>
+    </ion-buttons>
+    <ion-title>CURRENT INQUIRIES</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" scrollEvents="true" [appHeaderOnScroll]="header">
+
+  <!-- Refresher -->
+  <ion-refresher slot="fixed" (ionRefresh)="refrashCurrentInquiryList($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Searchbar -->
+  <ion-searchbar mode="ios" [(ngModel)]="globalSearchInput" debounce="1000" (ionChange)="searchCurrentInquiry($event)">
+  </ion-searchbar>
+
+  <div class="currentInquiryList">
+
+    <!-- Empty Image  -->
+    <div *ngIf="canShowList && allInquiryList && allInquiryList.length < 1">
+      <div class="noMoreSvgBox">
+        <div class="noMoreSvg">
+          <img src="../../../../assets/waiting.svg" alt="">
+        </div>
+        <div class="noMsg">
+          No Any In Process Inquiries
+        </div>
+      </div>
+    </div>
+
+    <!-- Inquiry List for Display  -->
+    <ion-list lines="full" *ngIf="canShowList && allInquiryList && allInquiryList.length > 0">
+      <ion-item class="oneInquiry ion-activatable ripple-parent  ion-no-padding" *ngFor="let inquiry of allInquiryList"
+        (click)="goToInquiryDetail(inquiry)">
+        <ion-label class="ion-text-wrap paddingStart">
+          <ion-text class="inquiryName">
+            <div class="inquiryName">{{inquiry.firstName}} {{inquiry.lastName}}</div>
+          </ion-text>
+          <ion-text>
+            <div class="inquiryParentName"><span class="dot"></span> <span>{{inquiry.businessName}}</span> </div>
+          </ion-text>
+          <ion-text *ngIf="inquiry.owner == ownerId && role !=='ROLE_RETAILER'">
+            <span class="status" [ngClass]="{'holdInquiry': inquiry.status == 'HOLD_BY_CLIENT',
+              'workOnInquiry': (inquiry.status == 'APPROVED_BY_JR' ||
+              inquiry.status == 'CONFIRMED_BY_CLIENT' ||
+               inquiry.status == 'PROVISIONING' ||
+               inquiry.status == 'REQUIREMENT'||
+               inquiry.status == 'INSTALLATION')}">{{getInquiryStageName(inquiry.status)}}</span>
+          </ion-text>
+          <ion-text *ngIf="inquiry.owner !== ownerId || role =='ROLE_RETAILER'">
+            <span class="status"
+              [ngClass]="{'holdInquiry': inquiry.status == 'HOLD_BY_CLIENT'}">{{getInquiryStageName(inquiry.status)}}</span>
+          </ion-text>
+        </ion-label>
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+        <ion-ripple-effect></ion-ripple-effect>
+      </ion-item>
+
+      <!-- Infinite-scroll -->
+      <ion-infinite-scroll class="moreInquiryLoader" threshold="100px" (ionInfinite)="loadMoreCurrentInquiry($event)">
+        <ion-infinite-scroll-content loadingSpinner="lines-small" loadingText="Loading more inquiry...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-list>
+
+    <!-- Skeleton -->
+    <ion-list lines="none" *ngIf="!canShowList">
+      <ion-item class="oneInquiry" *ngFor="let number of [1,2,3,4,5,6,7]">
+        <ion-label class="ion-text-wrap">
+          <ion-text class="inquiryName">
+            <div class="inquiryName">
+              <ion-skeleton-text animated style="width: 55%;height: 1.25rem"></ion-skeleton-text>
+            </div>
+          </ion-text>
+          <ion-text>
+            <div class="inquiryParentName">
+              <ion-skeleton-text animated style="width: 75%;height: 1.1rem"></ion-skeleton-text>
+            </div>
+          </ion-text>
+          <ion-text>
+            <ion-skeleton-text animated style="width: 40%;height: 1rem"></ion-skeleton-text>
+          </ion-text>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+  </div>
+</ion-content>

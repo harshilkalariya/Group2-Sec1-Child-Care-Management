@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Payment
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="welcome-card">
+    <!-- Image source: https://b.stripecdn.com/site-statics-srv/assets/assets/img/v3/home/social-9755e0835b1ab1538bddad515c24744b.png -->
+    <ion-img src="../../assets/stripe.png"></ion-img>
+    <ion-card-header>
+      <ion-card-subtitle>Make your patment</ion-card-subtitle>
+      <ion-card-title>Stripe Secure</ion-card-title>
+      <ion-row *ngIf="!responseData">
+        <ion-col>Total Deposit Amount</ion-col>
+        <ion-col> $10 </ion-col>
+      </ion-row>
+      <ion-row *ngIf="responseData">
+        <ion-col>Your payment of $10 is successfull</ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content>
+      <form *ngIf="!responseData" [formGroup]="paymentInput" (ngSubmit)="paymentSheet()">
+        <ion-item class="ion-no-padding inputUnderline">
+          <ion-label color="dark" position="floating">Name</ion-label>
+          <ion-input type="text" formControlName="name"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding inputUnderline">
+          <ion-label color="dark" position="floating">Email ID</ion-label>
+          <ion-input type="text" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-button type="submit" expand="block" class="ion-margin-top">Next Step</ion-button>
+      </form>
+      <form *ngIf="responseData" (ngSubmit)="downloadPdf()">
+        <ion-button type="submit" class="loginBtn" color="dark" expand="block" [disabled]="!pdfObj">Download Invoice
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<!-- <ion-content class="ion-padding">
+  
+</ion-content> -->

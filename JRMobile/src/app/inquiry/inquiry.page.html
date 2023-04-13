@@ -1,0 +1,60 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>INQUIRY</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div class="inquiryCards">
+    <div class="inquiryCard ion-activatable ripple-parent" (click)="goToNewInquiry()">
+      <div class="illustrater">
+        <img src="../../assets/new_inquiry.jpg" alt="">
+      </div>
+      <div class="inquiryName">
+        <div class="inquiryClickHeader">
+          <div class="inquiryClickHeaderName">Register Your Child</div>
+          <ul class="inquiryPoints">
+            <li>First come first serve</li>
+            <li>Project by JR</li>
+            <li>More accurate information protect you more</li>
+          </ul>
+        </div>
+      </div>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+
+    <div class="inquiryCard ion-activatable ripple-parent" (click)="goToCurrentInquiry()">
+      <div class="illustrater">
+        <img src="../../assets/waiting.jpg" alt="">
+      </div>
+      <div class="inquiryName">
+        <div class="inquiryClickHeader">
+          <div class="inquiryClickHeaderName">Track & Complete Your Application</div>
+          <ul class="inquiryPoints">
+            <li>Step by step information</li>
+            <li>Check status of your application</li>
+          </ul>
+        </div>
+      </div>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+
+
+    <div class="inquiryCard ion-activatable ripple-parent" (click)="goToCompletedInquiry()">
+      <div class="illustrater">
+        <img src="../../assets/completed_inquiry.jpg" alt="">
+      </div>
+      <div class="inquiryName">
+        <div class="inquiryClickHeader">
+          <div class="inquiryClickHeaderName">Completed Applications</div>
+          <ul class="inquiryPoints">
+            <li>Happy customers</li>
+            <li>Canceled from client</li>
+          </ul>
+        </div>
+      </div>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+  </div>
+</ion-content>

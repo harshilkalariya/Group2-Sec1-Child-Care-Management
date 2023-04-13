@@ -1,0 +1,140 @@
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+:root {
+  --body: #ffffff;
+  --bodyRGB: 255, 255, 255;
+  --dark: #212325;
+  --darkRGB: 33, 35, 37;
+  --font: #212325;
+  --font-dark: #ffffff;
+  --font-gold: #c49450;
+  --font-goldRGB: 196, 148, 80;
+  --card-backGround: #f6f6f4;
+  --card-backGround-dark: #ab8869;
+  --card-border: #efefeb;
+
+  --ion-background-color: #ffffff;
+  --ion-background-color-rgb: 255, 255, 255;
+
+  --ion-text-color: #212325;
+  --ion-text-color-rgb: 33, 35, 37;
+
+  --ion-color-step-50: #efebe7;
+  --ion-color-step-100: #e4e1dd;
+  --ion-color-step-150: #d9d6d2;
+  --ion-color-step-200: #cfccc8;
+  --ion-color-step-250: #c4c1be;
+  --ion-color-step-300: #b9b7b4;
+  --ion-color-step-350: #aeacaa;
+  --ion-color-step-400: #a3a29f;
+  --ion-color-step-450: #989795;
+  --ion-color-step-500: #8e8d8b;
+  --ion-color-step-550: #838281;
+  --ion-color-step-600: #787777;
+  --ion-color-step-650: #6d6d6c;
+  --ion-color-step-700: #626262;
+  --ion-color-step-750: #575858;
+  --ion-color-step-800: #4c4d4e;
+  --ion-color-step-850: #424344;
+  --ion-color-step-900: #373839;
+  --ion-color-step-950: #2c2e2f;
+}
+
+ion-header {
+
+  ion-toolbar {
+    --background: transparent !important;
+    background-color: var(--body) !important;
+    --color: var(--font) !important;
+    --border: none !important;
+  }
+}
+
+.header-md:after {
+  display: none;
+}
+
+.fw-600 {
+  font-weight: 600;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+button.alert-button.alert-button-confirm {
+  background-color: var(--dark) !important;
+  color: var(--font-dark) !important;
+}
+button.alert-button.alert-button-confirm-danger {
+  background-color: var(--ion-color-danger) !important;
+  color: var(--ion-color-danger-contrast) !important;
+}
+
+.sc-ion-action-sheet-md-h {
+  --max-height: calc(70% - (var(--ion-safe-area-top) + var(--ion-safe-area-bottom))) !important;
+}
+
+.action-sheet-button-inner.sc-ion-action-sheet-md {
+  justify-content: center;
+}
+
+.action-sheet-group-cancel .sc-ion-action-sheet-md {
+  border-top: 1px solid rgba(var(--darkRGB), 0.2) !important;
+  font-weight: 600 !important;
+  color: var(--ion-color-danger) !important;
+}
+
+.action-sheet-group.sc-ion-action-sheet-md:first-child {
+  padding-top: 15px;
+  border-top-left-radius: 25px !important;
+  border-top-right-radius: 25px !important;
+}
+
+.ripple-parent {
+  position: relative;
+  overflow: hidden;
+}
+
+.alert-wrapper.sc-ion-alert-md {
+  background: var(--card-backGround) !important;
+  border-radius: 10px !important;
+}
+
+.alert-button-group.sc-ion-alert-md {
+  padding-bottom: 18px !important;
+}
+
+.alert-button.sc-ion-alert-md {
+  border-radius: 5px !important;
+}
+
+ion-alert {
+  backdrop-filter: blur(2px) !important;
+}
+
+ion-modal {
+  &.bottom-end {
+    align-items: flex-end;
+    --height: auto;
+    .ion-page {
+      position: relative;
+      display: block;
+      contain: content;
+    }
+  }
+}

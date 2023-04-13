@@ -1,0 +1,245 @@
+<ion-header #header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/inquiry/current-inquiry"></ion-back-button>
+    </ion-buttons>
+    <ion-title>INQUIRY DETAIL</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" scrollEvents="true" [appHeaderOnScroll]="header">
+
+  <div class="currentInquiryDetailPage" *ngIf="canLoad">
+    <div class="clieantAllDetail">
+      <div class="clientDetail">
+        <div class="clientName">
+          {{selectedInquiry?.firstName}} {{selectedInquiry?.lastName}}
+        </div>
+        <div class="numberAddressMore">
+          <div class="nameAndNumber">
+            <div class="number">
+              <div class="numberIcon">
+                <ion-icon name="call"></ion-icon>
+              </div>
+              <div>
+                <div>{{selectedInquiry?.mobileNumber}}</div>
+                <div *ngIf="selectedInquiry?.secondNumber">{{selectedInquiry?.secondNumber}}</div>
+              </div>
+            </div>
+            <div class="type">
+              <div class="typeIcon">
+                <ion-icon name="business"></ion-icon>
+              </div>
+              <div>{{selectedInquiry?.inquiryType}}</div>
+            </div>
+          </div>
+          <div class="address">
+            <div class="addressIcon">
+              <ion-icon name="location"></ion-icon>
+            </div>
+            <div>
+              <div>
+                {{selectedInquiry?.houseDetail}},
+              </div>
+              <div>
+                {{selectedInquiry?.areaDetail}},
+              </div>
+              <div>
+                {{selectedInquiry?.cityTitle}},
+                {{selectedInquiry?.districtTitle}},
+                {{selectedInquiry?.stateTitle}},
+              </div>
+              <div>
+                Pincode - {{selectedInquiry?.pincode}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="otherInformation">
+        <div class="inquiryByandOwner">
+          <div class="titleByandOwner">Parent :</div>
+          <div>{{selectedInquiry?.businessName}}</div>
+        </div>
+        <!-- <div class="inquiryByandOwner">
+          <div class="titleByandOwner">Partner :</div>
+          <div>{{selectedInquiry?.ownerName}}</div>
+        </div> -->
+        <div class="inquiryByandOwner" *ngIf="selectedInquiry?.interiorName">
+          <div class="titleByandOwner">Interior :</div>
+          <div>{{selectedInquiry?.interiorName}}</div>
+        </div>
+        <div class="status">
+          {{selectedInquiry? getInquiryStageName(selectedInquiry.status) : ''}}
+        </div>
+      </div>
+    </div>
+
+    <div class="projectTimeLine">
+      <div class="text">
+        Project Status & Timeline
+      </div>
+    </div>
+
+    <div class="timeline" *ngIf="timelineData">
+      <div class="timelineCard" *ngFor="let inquiry of timeline">
+        <div class="cardFirstLine">
+          <div class="cardDetail" [ngClass]="{completedActivity: inquiry.date}">
+            <div class="cardName">{{inquiry.status}}</div>
+            <div class="cardDate" *ngIf="inquiry.date">{{inquiry.date | date:"dd-MMM-yyyy hh:mm a"}}</div>
+            <div class="cardDesc" *ngIf="inquiry.desc">{{inquiry.desc}}</div>
+          </div>
+          <div class="icon" *ngIf="inquiry.status !=='Response By Client'">
+            <div class="doneIcon" *ngIf="inquiry.date">
+              <ion-icon name="checkmark-circle"></ion-icon>
+            </div>
+          </div>
+          <div class="icon" *ngIf="inquiry.status =='Response By Client'">
+            <div class="doneIcon" *ngIf="inquiry.date && selectedInquiry?.status !=='HOLD_BY_CLIENT'">
+              <ion-icon name="checkmark-circle"></ion-icon>
+            </div>
+            <div class="holdIcon" *ngIf="inquiry.date && selectedInquiry?.status =='HOLD_BY_CLIENT'">
+              <ion-icon name="alert-circle"></ion-icon>
+            </div>
+          </div>
+        </div>
+
+        <!--! Action on Running Inquiry -->
+        <div *ngIf="selectedInquiry?.owner == ownerId && role !=='ROLE_RETAILER'">
+
+          <!-- On Response by Client -->
+          <div *ngIf="selectedInquiry?.status =='APPROVED_BY_JR' && inquiry.status=='Response By Client'">
+            <ion-row class=" inquiryAction">
+              <ion-col class="inquiryInput ion-no-padding">
+                <ion-item>
+                  <ion-label position="stacked">Feedback</ion-label>
+                  <ion-textarea auto-grow="true" type="text" [(ngModel)]="inquiryFeedback"></ion-textarea>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row class="inquiryInput  ion-no-padding">
+              <ion-col size="12">
+                <ion-button color="dark" expand="block"
+                  (click)="responseToInquiry('CONFIRMED_BY_CLIENT', selectedInquiry.enquiryId)">Confirm by Client
+                </ion-button>
+              </ion-col>
+              <ion-col size="12">
+                <ion-button color="warning" expand="block" fill="outline"
+                  (click)="holdAlert()">Hold by Client</ion-button>
+              </ion-col>
+              <ion-col size="12">
+                <ion-button color="danger" expand="block" fill="clear" (click)="cancelAlert()">Cancel by Client
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </div>
+
+          <!-- on Hold -->
+          <div *ngIf="selectedInquiry?.status =='HOLD_BY_CLIENT' && inquiry.status=='Response By Client'">
+            <ion-row class=" inquiryAction">
+              <ion-col class="inquiryInput  ion-no-padding">
+                <ion-item>
+                  <ion-label position="stacked">Feedback</ion-label>
+                  <ion-textarea auto-grow="true" type="text" [(ngModel)]="inquiryFeedback"></ion-textarea>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row class="inquiryInput" *ngIf="selectedInquiry?.status =='HOLD_BY_CLIENT'">
+              <ion-col size="12">
+                <ion-button color="dark" expand="block"
+                  (click)="responseToInquiry('CONFIRMED_BY_CLIENT', selectedInquiry.enquiryId)">Confirm by Client
+                </ion-button>
+              </ion-col>
+              <ion-col size="12">
+                <ion-button color="danger" expand="block" fill="clear" (click)="cancelAlert()">Cancel by Client
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </div>
+
+
+          <!-- on Provisioning -->
+          <div *ngIf="selectedInquiry?.status =='CONFIRMED_BY_CLIENT' && inquiry.status=='Provisioning'">
+            <ion-row class=" inquiryAction">
+              <ion-col class="inquiryInput  ion-no-padding">
+                <ion-item>
+                  <ion-label position="stacked">Feedback</ion-label>
+                  <ion-textarea auto-grow="true" type="text" [(ngModel)]="inquiryFeedback"></ion-textarea>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row class="inquiryInput">
+              <ion-col size="12">
+                <ion-button color="dark" expand="block"
+                  (click)="responseToInquiry('PROVISIONING', selectedInquiry.enquiryId)">Provisioning Done</ion-button>
+              </ion-col>
+            </ion-row>
+          </div>
+
+          <!-- on Requirement Collection -->
+          <div *ngIf="selectedInquiry?.status =='PROVISIONING' && inquiry.status=='Requirement Collection'">
+            <ion-row class=" inquiryAction">
+              <ion-col class="inquiryInput ion-no-padding">
+                <ion-item>
+                  <ion-label position="stacked">Feedback</ion-label>
+                  <ion-textarea auto-grow="true" type="text" [(ngModel)]="inquiryFeedback"></ion-textarea>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row class="inquiryInput">
+              <ion-col size="12">
+                <ion-button color="dark" expand="block"
+                  (click)="responseToInquiry('REQUIREMENT', selectedInquiry.enquiryId)">
+                  Requirement Collected</ion-button>
+              </ion-col>
+            </ion-row>
+          </div>
+
+          <!-- on Installation -->
+          <div *ngIf="selectedInquiry?.status =='REQUIREMENT' && inquiry.status=='Installation'">
+            <ion-row class=" inquiryAction">
+              <ion-col class="inquiryInput ion-no-padding">
+                <ion-item>
+                  <ion-label position="stacked">Feedback</ion-label>
+                  <ion-textarea auto-grow="true" type="text" [(ngModel)]="inquiryFeedback"></ion-textarea>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row class="inquiryInput">
+              <ion-col size="12">
+                <ion-button color="dark" expand="block"
+                  (click)="responseToInquiry('INSTALLATION', selectedInquiry.enquiryId)">Installation Completed
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </div>
+
+          <!-- on Commissioning and Training -->
+          <div *ngIf="selectedInquiry?.status =='INSTALLATION' && inquiry.status=='Commissioning & Training'">
+            <ion-row class=" inquiryAction">
+              <ion-col class="inquiryInput ion-no-padding">
+                <ion-item>
+                  <ion-label position="stacked">Feedback</ion-label>
+                  <ion-textarea auto-grow="true" type="text" [(ngModel)]="inquiryFeedback"></ion-textarea>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row class="inquiryInput">
+              <ion-col size="12">
+                <ion-button color="dark" expand="block"
+                  (click)="responseToInquiry('COMMISSIONING', selectedInquiry.enquiryId)">Commissioning & Training Done
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="waitingSvgBox" *ngIf="!timelineData">
+      <div class="waitingSvg">
+        <img src="../../../../assets/waiting.svg" alt="">
+      </div>
+    </div>
+  </div>
+</ion-content>
